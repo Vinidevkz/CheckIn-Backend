@@ -1,0 +1,28 @@
+{
+  "name": "checkin-backend",
+  "version": "1.0.0",
+  "description": "Backend do projeto CheckIn",
+  "keywords": [
+    "cibe"
+  ],
+  "homepage": "https://github.com/Vinidevkz/CheckIn-Backend#readme",
+  "bugs": {
+    "url": "https://github.com/Vinidevkz/CheckIn-Backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vinidevkz/CheckIn-Backend.git"
+  },
+  "license": "ISC",
+  "author": "Vinicius Eduardo Correia dos Santos",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm run dev"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
+  }
+}
