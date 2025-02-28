@@ -6,8 +6,8 @@ class userController {
         try {
             const {nameUser, emailUser, passwordUser, cpfUser, dataNasc} = req.body
 
-            if(!nameUser || !emailUser || !passwordUser || !cpfUser || dataNasc){
-               res.status(400).json({message: 'Informações incompletas.'})
+            if(!nameUser || !emailUser || !passwordUser || !cpfUser || !dataNasc){
+               res.status(400).json({message: 'Todos os campos são obrigatórios.'})
             }
 
             const newUser = await User.create({
