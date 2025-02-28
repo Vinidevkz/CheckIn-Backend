@@ -1,18 +1,23 @@
 'use strict';
-const {
-  Model,
-  Sequelize
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class userSessions extends Model {
-
     static associate(models) {
-      userSessions.belongsToMany(models.user, {
-        foreignKey: 'idMySession',
-        as: 'mysession'
-      })
+
+      userSessions.belongsTo(models.User, {
+        foreignKey: 'idUser', 
+        as: 'user' 
+      });
+
+
+      userSessions.belongsTo(models.Session, {
+        foreignKey: 'idSession', 
+        as: 'session' 
+      });
     }
   }
+
   userSessions.init({
     idMySession: {
       type: DataTypes.INTEGER,
@@ -20,19 +25,28 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     idSession: {
-      type: Sequelize.NUMBER,
+      type: DataTypes.INTEGER, 
       references: {
-        model: 'Sessions',
-        key: 'idSession'
+        model: 'Sessions', 
+        key: 'idSession' 
       },
-      onUpdate: 'CASCADE',
+      onUpdate: 'CASCADE', 
       onDelete: 'SET NULL'
     },
-    idSeat: DataTypes.INTEGER,
-    priceTicket: DataTypes.FLOAT
+    idSeat: {
+      type: DataTypes.INTEGER
+    },
+    idUser: {
+      type: DataTypes.INTEGER 
+    },
+    priceTicket: {
+      type: DataTypes.FLOAT
+    }
   }, {
     sequelize,
-    modelName: 'userSessions',
+    modelName: 'userSessions', 
+    tableName: 'userSessions' 
   });
+
   return userSessions;
 };
