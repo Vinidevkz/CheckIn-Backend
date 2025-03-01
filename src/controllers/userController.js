@@ -42,7 +42,7 @@ class userController {
 
             res.status(201).json({message: 'Usuário criado com sucesso!', newUser, token: token})
         } catch (error) {
-            res.status(500).json({error: error.message})
+            res.status(500).json({message: "Houve um erro no servidor", error: error.message, details: error})
         }
     }
 
@@ -69,6 +69,16 @@ class userController {
         } catch (error) {
             res.status(500).json({message: 'Houve um erro interno do servidor. Tente novamente mais tarde.', details: error.message})
         }
+    }
+
+    static async updateUser(req, res){
+        const {nameUser, emailUser, passwordUser, cpfUser, dataNasc} = req.body
+
+        const updatedUser = User.findOne({})
+    }
+
+    static async deleteUser(req, res){
+
     }
 
     static async allUsers(req, res){

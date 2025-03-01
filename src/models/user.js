@@ -15,11 +15,28 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    nomeUser: DataTypes.STRING,
-    emailUser: DataTypes.STRING,
-    passwordUser: DataTypes.STRING,
-    cpfUser: DataTypes.STRING,
-    dataNasc: DataTypes.STRING
+    nameUser: {
+      type:DataTypes.STRING,
+      allowNull: false,
+    },
+    emailUser: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    passwordUser: {
+      type:DataTypes.STRING,
+      allowNull: false, 
+    },
+    cpfUser: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    dataNasc: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   }, {
     sequelize,
     modelName: 'User',
