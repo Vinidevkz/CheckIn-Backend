@@ -1,9 +1,13 @@
 const express = require('express')
 const app = express()
-const db = require('./models')
+
+
+require("dotenv").config();
+
+const db = require('./src/models')
 
 //import routes
-const userRoutes = require('./routes/userRoutes')
+const userRoutes = require('./src/routes/userRoutes')
 
 //configs
 app.use(express.json())
@@ -11,7 +15,7 @@ const port = 3000
 
 db.sequelize.authenticate()
   .then(() => {
-    console.log('Conexão com o banco de dados estabelecida com sucesso.');
+    console.log('✓ Conexão com o banco de dados estabelecida com sucesso.');
   })
   .catch(err => {
     console.error('Erro ao conectar ao banco de dados:', err);
@@ -20,7 +24,7 @@ db.sequelize.authenticate()
 
 db.sequelize.sync()
   .then(() => {
-    console.log('Modelos sincronizados com o banco de dados.');
+    console.log('✓ Modelos sincronizados com o banco de dados.');
   })
   .catch(err => {
     console.error('Erro ao sincronizar modelos:', err);
@@ -29,7 +33,12 @@ db.sequelize.sync()
 //routes
 app.use('/api', userRoutes)
 
+
+
 //listens
 app.listen(port, () => {
+
+    console.log("JWT_SECRET:", process.env.JWT_SECRET);
+
     console.log('- Servidor rodando na porta', port)
 })
