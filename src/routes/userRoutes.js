@@ -3,7 +3,7 @@ const router = express.Router()
 const UserController = require('../controllers/userController')
 
 //middleware
-const Authenticate = require('../authConfig/authJWT')
+const Authenticate = require('../middlewares/authJWT')
 
 //create user
 router.post('/users/logon', UserController.createUser)
