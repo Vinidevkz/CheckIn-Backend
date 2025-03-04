@@ -9,7 +9,7 @@ const Authenticate = require('../middlewares/authJWT')
 router.post('/users/logon', UserController.createUser)
 
 //login user
-router.post('/users/login', Authenticate, UserController.loginUser)
+router.post('/users/login', UserController.loginUser)
 
 //update user
 router.put('/users/update', Authenticate, UserController.updateUser)

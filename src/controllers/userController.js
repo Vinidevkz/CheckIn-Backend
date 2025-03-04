@@ -2,7 +2,6 @@ const {User} = require('../models')
 const jwt = require('jsonwebtoken')
 
 const bcrypt = require('bcrypt')
-const { all } = require('../routes/userRoutes')
 
 const generateToken = () => {
     const payload = {
@@ -16,7 +15,6 @@ const generateToken = () => {
 
     return token
 }
-
 
 class userController {
 
