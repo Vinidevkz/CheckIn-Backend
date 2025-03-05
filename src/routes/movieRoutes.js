@@ -6,10 +6,10 @@ const MovieController = require('../controllers/movieController')
 const Authenticate = require('../middlewares/authJWT')
 
 //create Movie
-router.post('/movies/create', MovieController.createMovie)
+router.post('/movies/create', Authenticate, MovieController.createMovie)
 
 //login Movie
-router.post('/movies/get', MovieController.getMovie)
+router.post('/movies/get', Authenticate, MovieController.getMovie)
 
 //update Movie
 router.put('/movies/update', Authenticate, MovieController.updateMovie)

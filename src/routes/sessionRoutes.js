@@ -6,10 +6,10 @@ const SessionController = require('../controllers/sessionController')
 const Authenticate = require('../middlewares/authJWT')
 
 //create Session
-router.post('/sessions/create', SessionController.createSession)
+router.post('/sessions/create', Authenticate, SessionController.createSession)
 
-//login Session
-router.post('/sessions/get', SessionController.getSession)
+//get Session
+router.post('/sessions/get', Authenticate, SessionController.getSession)
 
 //update Session
 router.put('/sessions/update', Authenticate, SessionController.updateSession)

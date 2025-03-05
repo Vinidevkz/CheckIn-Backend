@@ -10,6 +10,7 @@ const db = require('./src/models')
 const userRoutes = require('./src/routes/userRoutes')
 const movieRoutes = require('./src/routes/movieRoutes')
 const sessionRoutes = require('./src/routes/sessionRoutes')
+const seatRoutes = require('./src/routes/seatRoutes')
 
 //configs
 app.use(express.json())
@@ -36,6 +37,7 @@ db.sequelize.sync()
 app.use('/api', userRoutes)
 app.use('/api', movieRoutes)
 app.use('/api', sessionRoutes)
+app.use('/api', seatRoutes)
 
 
 

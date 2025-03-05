@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
     },
     idSession: {
-      type: Sequelize.NUMBER,
+      type: DataTypes.INTEGER,
       references: {
         model: 'Sessions',
         key: 'idSession'
@@ -32,9 +32,16 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'CASCADE',
       onDelete: 'SET NULL'
     },
-    numberSeat: DataTypes.INTEGER,
+    numberSeat: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true
+    },
     statusSeat: DataTypes.BOOLEAN,
-    idUser: DataTypes.INTEGER
+    idUser: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Seat',
