@@ -37,19 +37,30 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'CASCADE', 
       onDelete: 'SET NULL'
     },
-    idSeat: {
-      type: DataTypes.INTEGER
+    idSeat:  {
+      type: DataTypes.INTEGER, 
+      references: {
+        model: 'Seat', 
+        key: 'idSeat' 
+      },
+      onUpdate: 'CASCADE', 
+      onDelete: 'SET NULL'
     },
-    idUser: {
-      type: DataTypes.INTEGER 
+    idUser:  {
+      type: DataTypes.INTEGER, 
+      references: {
+        model: 'User', 
+        key: 'idUser' 
+      },
+      onUpdate: 'CASCADE', 
+      onDelete: 'SET NULL'
     },
     priceTicket: {
       type: DataTypes.FLOAT
     }
   }, {
     sequelize,
-    modelName: 'userSessions', 
-    tableName: 'userSessions' 
+    modelName: 'UserSessions'
   });
 
   return userSessions;

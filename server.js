@@ -11,6 +11,7 @@ const userRoutes = require('./src/routes/userRoutes')
 const movieRoutes = require('./src/routes/movieRoutes')
 const sessionRoutes = require('./src/routes/sessionRoutes')
 const seatRoutes = require('./src/routes/seatRoutes')
+const userSessionsRoutes = require('./src/routes/userSessionsRoutes')
 
 //configs
 app.use(express.json())
@@ -38,13 +39,9 @@ app.use('/api', userRoutes)
 app.use('/api', movieRoutes)
 app.use('/api', sessionRoutes)
 app.use('/api', seatRoutes)
-
-
+app.use('/api', userSessionsRoutes)
 
 //listens
 app.listen(port, () => {
-
-    console.log("JWT_SECRET:", process.env.JWT_SECRET);
-
     console.log('- Servidor rodando na porta', port)
 })

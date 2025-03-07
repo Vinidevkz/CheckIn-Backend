@@ -9,9 +9,7 @@ const generateToken = () => {
         email: User.emailUser
     }
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: '1h'
-    })
+    const token = jwt.sign(payload, process.env.JWT_SECRET)
 
     return token
 }

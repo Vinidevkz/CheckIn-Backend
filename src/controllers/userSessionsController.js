@@ -1,36 +1,39 @@
 
-const {Session} = require('../models')
-const {UserSession} = require('../models')
+const {UserSessions, Session, Seat, Movie} = require('../models')
 
-class UserSessionController {
+class UserSessionsController {
 
-    static async createUserSession(req, res){
+    static async createUserSessions(req, res){
         try {
             const {idSession, idSeat, priceTicket, idUser} = req.body
 
-            const newUserSession = await UserSession.create({
+            const newUserSessions = await UserSessions.create({
                 idSession,
                 idSeat,
                 priceTicket,
                 idUser
             })
 
-            res.status(201).json({message: 'Ingresso criado com sucesso!', newUserSession})
+            res.status(201).json({message: 'Ingresso criado com sucesso!', newUserSessions})
             return
         } catch (error) {
-            res.status(500).json({message: "Houve um erro no servidor", error: error.message, details: error})
+            res.status(500).json({message: "Houve um erro no servidor", details: error.message})
         }
     }
 
-    static async getUserSession(req, res){
+    static async getUserSessions(req, res){
         try {
-            const {idUserSession} = req.body
+            const {idMySession} = req.body
 
-            const oneUserSession = await UserSession.findOne({
-                where: { idMySession },
+            const oneUserSessions = await UserSessions.findByPk(idMySession, {
                 include: [{
                     model: Session,
-                    as: 'session'  
+                    as: 'session',
+                    include: [{
+                        model: Movie,
+                        as: 'movie',
+                        attributes: ['titleMovie']
+                    }]  
                 },
                 {
                     model: Seat,
@@ -38,12 +41,12 @@ class UserSessionController {
                 }]
             })
 
-            if(!oneUserSession){
+            if(!oneUserSessions){
                 res.status(404).json({message: 'Id do Ingresso incorreto.'})
                 return
             }
 
-            res.status(200).json({message: "Ingresso encontrado com sucesso.", UserSession: oneUserSession})
+            res.status(200).json({message: "Ingresso encontrado com sucesso.", UserSessions: oneUserSessions})
             return
         } catch (error) {
             res.status(500).json({message: 'Houve um erro interno do servidor. Tente novamente mais tarde.', details: error.message})
@@ -51,34 +54,34 @@ class UserSessionController {
     }
 
     /*
-        static async updateUserSession(req, res){
+        static async updateUserSessions(req, res){
         try {
-            const {idUserSession, idSeat, numberUserSession, statusUserSession, idUser} = req.body
+            const {idUserSessions, idSeat, numberUserSessions, statusUserSessions, idUser} = req.body
 
-            if(!idUserSession){
+            if(!idUserSessions){
                 res.status(400).json({message: 'Id obrigatório.'})
                 return
             }
 
-            const existingUserSession = await UserSession.findByPk(idUserSession)
+            const existingUserSessions = await UserSessions.findByPk(idUserSessions)
             
-            if(!existingUserSession){
+            if(!existingUserSessions){
                 res.status(400).json({message: 'Ingresso inexistente.'})
                 return
             }
     
             const updateData = {}
-                if (idUserSession) updateData.idUserSession = idUserSession
+                if (idUserSessions) updateData.idUserSessions = idUserSessions
                 if (idSession) updateData.idSession = idSession
-                if (numberUserSession) updateData.numberUserSession = numberUserSession
-                if (statusUserSession) updateData.statusUserSession = statusUserSession
+                if (numberUserSessions) updateData.numberUserSessions = numberUserSessions
+                if (statusUserSessions) updateData.statusUserSessions = statusUserSessions
                 if (idUser) updateData.idUser = idUser
 
-            await UserSession.update(updateData, {
-                where: {idUserSession}
+            await UserSessions.update(updateData, {
+                where: {idUserSessions}
             })
     
-            res.status(202).json({message: 'Ingresso alterado com sucesso.', UserSession: updateData})
+            res.status(202).json({message: 'Ingresso alterado com sucesso.', UserSessions: updateData})
             return
         } catch (error) {
             res.status(500).json({message: 'Houve um erro interno. Tente novamente mais tarde.', details: error.message})
@@ -88,19 +91,19 @@ class UserSessionController {
     }
     */
 
-    static async deleteUserSession(req, res){
+    static async deleteUserSessions(req, res){
         try {
-            const {idUserSession} = req.body
+            const {idUserSessions} = req.body
 
-            const existingUserSession = await UserSession.findByPk(idUserSession)
+            const existingUserSessions = await UserSessions.findByPk(idUserSessions)
             
-            if(!existingUserSession){
+            if(!existingUserSessions){
                 res.status(400).json({message: 'Ingresso inexistente.'})
                 return
             }
 
-            await UserSession.destroy({
-                where: {idMySession: idUserSession}
+            await UserSessions.destroy({
+                where: {idMySession: idUserSessions}
             })
 
             res.status(200).json({message: 'Ingresso deletado com sucesso.'})
@@ -112,11 +115,11 @@ class UserSessionController {
 
     static async allUserSessions(req, res){
         try {
-            const allUserSessions = await UserSession.findAll()
+            const allUserSessionss = await UserSessions.findAll()
 
-            if(allUserSessions){
-                res.status(202).json({message: 'Todas os Ingressos: ', UserSessions: allUserSessions})
-            }else if(allUserSessions.length === 0){
+            if(allUserSessionss){
+                res.status(202).json({message: 'Todas os Ingressos: ', UserSessionss: allUserSessionss})
+            }else if(allUserSessionss.length === 0){
                 res.status(400).json({message: 'Não há Ingressos no banco.'})
             }
         } catch (error) {
@@ -125,4 +128,4 @@ class UserSessionController {
     }
 }
 
-module.exports = UserSessionController
+module.exports = UserSessionsController

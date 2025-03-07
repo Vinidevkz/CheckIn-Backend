@@ -5,7 +5,7 @@ class SessionController {
 
     static async createSession(req, res){
         try {
-            const {idMovie, cinemaSession, dateSession, priceTicket} = req.body
+            const {idMovie, cinemaSession, dateSession, hourSession, priceTicket} = req.body
 
             if(!idMovie || !cinemaSession || !dateSession || !priceTicket){
                res.status(400).json({message: 'Todos os campos são obrigatórios.'})
@@ -16,6 +16,7 @@ class SessionController {
                 idMovie,
                 cinemaSession,
                 dateSession,
+                hourSession,
                 priceTicket
             })
 
@@ -52,7 +53,7 @@ class SessionController {
 
     static async updateSession(req, res){
         try {
-            const {idSession, idMovie, cinemaSession, dateSession, priceTicket} = req.body
+            const {idSession, idMovie, cinemaSession, dateSession, hourSession, priceTicket} = req.body
 
             if(!idSession){
                 res.status(400).json({message: 'Id obrigatório.'})
@@ -70,6 +71,7 @@ class SessionController {
                 if (idMovie) updateData.idMovie = idMovie
                 if (cinemaSession) updateData.cinemaSession = cinemaSession
                 if (dateSession) updateData.dateSession = dateSession
+                if (hourSession) updateData.hourSession = hourSession
                 if (priceTicket) updateData.priceTicket = priceTicket
 
             await Session.update(updateData, {

@@ -24,6 +24,9 @@ module.exports = {
       dateSession: {
         type: Sequelize.DATE
       },
+      hourSession: {
+        type: Sequelize.STRING
+      },
       priceTicket: {
         type: Sequelize.FLOAT
       },

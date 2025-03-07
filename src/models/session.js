@@ -34,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     cinemaSession: DataTypes.STRING,
     dateSession: DataTypes.DATE,
+    hourSession: DataTypes.STRING,
     priceTicket: DataTypes.FLOAT
   }, {
     sequelize,
