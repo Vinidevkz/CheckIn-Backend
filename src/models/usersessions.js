@@ -5,11 +5,15 @@ module.exports = (sequelize, DataTypes) => {
   class userSessions extends Model {
     static associate(models) {
 
+      userSessions.belongsTo(models.Seat, {
+        foreignKey: 'idSeat', 
+        as: 'seat' 
+      });
+
       userSessions.belongsTo(models.User, {
         foreignKey: 'idUser', 
         as: 'user' 
       });
-
 
       userSessions.belongsTo(models.Session, {
         foreignKey: 'idSession', 
