@@ -9,6 +9,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      moviePoster: {
+        type: Sequelize.STRING
+      },
       titleMovie: {
         type: Sequelize.STRING
       },

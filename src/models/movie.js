@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
+    moviePoster: DataTypes.STRING,
     titleMovie: DataTypes.STRING,
     descMovie: DataTypes.STRING,
     dateLanc: DataTypes.DATE

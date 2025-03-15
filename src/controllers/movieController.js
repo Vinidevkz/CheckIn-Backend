@@ -4,7 +4,7 @@ class MovieController {
 
     static async createMovie(req, res){
         try {
-            const {titleMovie, descMovie, dateLanc} = req.body
+            const {titleMovie, moviePoster, descMovie, dateLanc} = req.body
 
             if(!titleMovie || !descMovie || !dateLanc){
                res.status(400).json({message: 'Todos os campos são obrigatórios.'})
@@ -13,11 +13,12 @@ class MovieController {
 
             const newMovie = await Movie.create({
                 titleMovie,
+                moviePoster,
                 descMovie,
                 dateLanc
             })
 
-            res.status(201).json({message: 'Usuário criado com sucesso!', newMovie})
+            res.status(201).json({message: 'Filme criado com sucesso!', newMovie})
             return
         } catch (error) {
             res.status(500).json({message: "Houve um erro no servidor", error: error.message, details: error})
@@ -44,7 +45,7 @@ class MovieController {
 
     static async updateMovie(req, res){
         try {
-            const {idMovie, titleMovie, descMovie, dateLanc} = req.body
+            const {idMovie, titleMovie, moviePoster, descMovie, dateLanc} = req.body
 
             if(!idMovie){
                 res.status(400).json({message: 'Id obrigatório.'})
@@ -60,6 +61,7 @@ class MovieController {
     
             const updateData = {}
                 if (titleMovie) updateData.titleMovie = titleMovie
+                if (moviePoster) updateData.moviePoster = moviePoster
                 if (descMovie) updateData.descMovie = descMovie
                 if (dateLanc) updateData.dateLanc = dateLanc
 
