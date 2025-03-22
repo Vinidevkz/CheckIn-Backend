@@ -20,4 +20,7 @@ router.delete('/movies/delete', Authenticate, MovieController.deleteMovie)
 //all Movies
 router.get('/movies/allMovies', Authenticate, MovieController.allMovies)
 
+//latestMovies
+router.get('/movies/latest', Authenticate, MovieController.latestMovies)
+
 module.exports = router

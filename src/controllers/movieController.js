@@ -113,6 +113,22 @@ class MovieController {
             res.status(500).json({message: 'Houve um erro'})
         }
     }
+
+    static async latestMovies(req, res){
+        try {
+            const latestMovies = await Movie.findAll({
+                order: [['createdAt', 'DESC']],
+                limit: 10
+            })
+
+            return res.status(200).json({movies: latestMovies})
+        } catch (error) {
+            return res.status(500).json({
+                message: "Erro ao buscar os filmes mais recentes.",
+                error: error.message
+            })
+        }
+    }
 }
 
 module.exports = MovieController
