@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     moviePoster: DataTypes.STRING,
     titleMovie: DataTypes.STRING,
     descMovie: DataTypes.STRING,
+    creators: DataTypes.STRING,
     dateLanc: DataTypes.DATE
   }, {
     sequelize,

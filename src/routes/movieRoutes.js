@@ -21,6 +21,6 @@ router.delete('/movies/delete', Authenticate, MovieController.deleteMovie)
 router.get('/movies/allMovies', Authenticate, MovieController.allMovies)
 
 //latestMovies
-router.get('/movies/latest', Authenticate, MovieController.latestMovies)
+router.post('/movies/latest', Authenticate, MovieController.latestMovies)
 
 module.exports = router

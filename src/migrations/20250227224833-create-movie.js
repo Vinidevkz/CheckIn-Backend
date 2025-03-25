@@ -18,6 +18,9 @@ module.exports = {
       descMovie: {
         type: Sequelize.STRING
       },
+      creators: {
+        type: Sequelize.STRING
+      },
       dateLanc: {
         type: Sequelize.DATE
       },
