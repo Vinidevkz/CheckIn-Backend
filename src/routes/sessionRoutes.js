@@ -17,7 +17,10 @@ router.put('/sessions/update', Authenticate, SessionController.updateSession)
 //delete Session
 router.delete('/sessions/delete', Authenticate, SessionController.deleteSession)
 
+//movie Sessions
+router.post('/sessions/movieSessions', SessionController.getMovieSessions)
+
 //all Sessions
-router.get('/sessions/allSessions', Authenticate, SessionController.allSessions)
+router.get('/sessions/allSessions', SessionController.allSessions)
 
 module.exports = router

@@ -19,7 +19,7 @@ module.exports = {
         onDelete: 'SET NULL'
       },
       numberSeat: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       statusSeat: {
         type: Sequelize.BOOLEAN

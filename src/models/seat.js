@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'SET NULL'
     },
     numberSeat: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },

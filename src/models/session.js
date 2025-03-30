@@ -15,6 +15,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'idMovie',
         as: 'movie'
       })
+
+      Session.hasMany(models.Seat, {
+        foreignKey: 'idSession',
+        as: 'seats'
+      });
     }
   }
   Session.init({
@@ -35,8 +40,19 @@ module.exports = (sequelize, DataTypes) => {
     cinemaSession: DataTypes.STRING,
     dateSession: DataTypes.DATE,
     hourSession: DataTypes.STRING,
-    priceTicket: DataTypes.FLOAT
-  }, {
+    priceTicket: DataTypes.FLOAT,
+    qtdSeatsOn: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        if (this.seats) {
+          return this.seats.filter(seat => seat.statusSeat === 1).length;
+        }
+        return 0; 
+      }
+    }
+
+  },
+   {
     sequelize,
     modelName: 'Session',
   });

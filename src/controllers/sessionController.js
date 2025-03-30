@@ -1,5 +1,12 @@
 const {Session} = require('../models')
 const {Movie} = require('../models')
+const {Seat} = require('../models'); 
+
+const {
+    Model,
+    Sequelize
+  } = require('sequelize');
+
 
 class SessionController {
 
@@ -108,6 +115,40 @@ class SessionController {
             res.status(500).json({message: 'Houve um erro interno. Tente novamente mais tarde.', details: error.message})
         }
     }
+
+    static async getMovieSessions(req, res) {
+        try {
+            const { idMovie } = req.body;
+    
+            if (!idMovie) {
+                return res.status(400).json({ message: "O campo 'idMovie' é obrigatório." });
+            }
+    
+            const movieSessions = await Session.findAll({
+                where: { idMovie },
+                attributes: [
+                    'idSession', 'cinemaSession', 'dateSession', 'hourSession', 'priceTicket',
+                    [Sequelize.literal(`(
+                        SELECT COUNT(*) 
+                        FROM seats 
+                        WHERE seats.idSession = Session.idSession 
+                        AND seats.statusSeat = 0
+                    )`), 'availableSeats']
+                ]
+            });
+    
+            if (movieSessions.length === 0) {
+                return res.status(404).json({ message: "Nenhuma sessão encontrada para este filme." });
+            }
+    
+            return res.status(200).json({ message: "Sessões do filme encontradas", sessions: movieSessions });
+        } catch (error) {
+            console.error("Erro ao buscar sessões:", error);
+            return res.status(500).json({ message: "Erro interno no servidor", details: error.message });
+        }
+    }
+    
+    
 
     static async allSessions(req, res){
         try {
