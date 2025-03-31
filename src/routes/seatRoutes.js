@@ -20,4 +20,7 @@ router.delete('/seats/delete', Authenticate, SeatController.deleteSeat)
 //all Seats
 router.get('/seats/allSeats', Authenticate, SeatController.allSeats)
 
+//session Seats
+router.post('/seats/sessionSeats', Authenticate, SeatController.getSessionSeats)
+
 module.exports = router

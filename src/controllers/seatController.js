@@ -119,6 +119,32 @@ class SeatController {
             res.status(500).json({message: 'Houve um erro'})
         }
     }
+
+    static async getSessionSeats(req, res){
+        try {
+            const {idSession} = req.body
+
+            if(!idSession){
+                return res.status(400).json({message: "O id da sessão deve ser passado."})
+            }
+
+            const seats = await Seat.findAll({
+                where: {
+                    idSession: idSession
+                }
+            })
+
+            if(seats.length === 0){
+                return res.status(404).json({message: "Não há assentos para essa sessão cadastrados."})
+            }
+
+            return res.status(200).json({seats})
+        } catch (error) {
+            console.error("Erro ao buscar assentos cadastrados.")
+            return res.status(500).json({message: "Erro ao buscar assentos cadastrados.", details: error.message})
+        }
+
+    }
 }
 
 module.exports = SeatController
